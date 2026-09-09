@@ -43,6 +43,16 @@
     button:hover {
       background-color: #0056b3;
     }
+    
+    /* Added to gray out disabled buttons */
+    button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+    
+    button:disabled:hover {
+      background-color: #cccccc;
+    }
 
     .display-container {
       display: flex;
@@ -174,6 +184,10 @@
         const imageFileName = `${letter.toLowerCase()}.jpg`;
         document.getElementById('displayImage').src = imageFileName;
         document.getElementById('displayImage').alt = data.name;
+
+        const currentIndex = selectEl.selectedIndex;
+        prevBtn.disabled = (currentIndex === 0);
+        nextBtn.disabled = (currentIndex === selectEl.options.length - 1);
       }
     }
 
