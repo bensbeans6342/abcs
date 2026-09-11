@@ -5,12 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ancient Civilizations ABCs</title>
   <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #333333;
+      --heading-color: #007bff;
+      --subtext-color: #555555;
+      --border-color: #ddd;
+      --controls-bg: #fff;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --heading-color: #4dabf7;
+      --subtext-color: #b0b0b0;
+      --border-color: #333333;
+      --controls-bg: #1e1e1e;
+    }
+
     body {
       font-family: Arial, sans-serif;
       max-width: 650px;
       margin: 40px auto;
       padding: 20px;
-      color: #333;
+      background-color: var(--bg-color) !important;
+      color: var(--text-color) !important;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     .controls {
@@ -20,7 +40,7 @@
       gap: 10px;
       margin-bottom: 30px;
       padding-bottom: 20px;
-      border-bottom: 2px solid #eee;
+      border-bottom: 2px solid var(--border-color);
       flex-wrap: wrap;
     }
 
@@ -28,7 +48,9 @@
       padding: 8px 16px;
       font-size: 1rem;
       border-radius: 6px;
-      border: 1px solid #ccc;
+      border: 1px solid var(--border-color);
+      background-color: var(--controls-bg);
+      color: var(--text-color);
     }
 
     button {
@@ -44,7 +66,6 @@
       background-color: #0056b3;
     }
     
-    /* Added to gray out disabled buttons */
     button:disabled {
       background-color: #cccccc;
       cursor: not-allowed;
@@ -64,19 +85,19 @@
       font-size: 3.5rem;
       font-weight: bold;
       margin: 0;
-      color: #007bff;
+      color: var(--heading-color);
     }
 
     .item-title {
       font-size: 2rem;
       margin: 0;
-      color: #222;
+      color: var(--text-color);
     }
 
     .item-description {
       font-size: 1.1rem;
       line-height: 1.6;
-      color: #555;
+      color: var(--subtext-color);
     }
 
     .item-image {
@@ -84,7 +105,24 @@
       max-height: 450px;
       object-fit: cover;
       border-radius: 8px;
-      border: 1px solid #ddd;
+      border: 1px solid var(--border-color);
+    }
+
+    .footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 2px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    #themeToggleBtn {
+      align-self: flex-start;
+      background-color: #6c757d;
+    }
+    #themeToggleBtn:hover {
+      background-color: #5a6268;
     }
   </style>
 </head>
@@ -136,11 +174,16 @@
     <p id="displayDescription" class="item-description"></p>
     <img id="displayImage" class="item-image" src="" alt="" />
   </div>
-<p>
-    Currently complete letters: D, P, S, T, Y, Z; <br>
-    2x China, 1x Egypt, 1x Odyssey, 1x Mesopotamia, 1x America <br>
-    Last Updated: 09-09-2026 17:48
+
+  <div class="footer">
+    <button id="themeToggleBtn">Switch to Dark Mode</button>
+    <p>
+      Currently complete letters: D, P, S, T, Y, Z; <br>
+      2x China, 1x Egypt, 1x Odyssey, 1x Mesopotamia, 1x America <br>
+      Last Updated: 09-09-2026 17:48
     </p>
+  </div>
+
   <script>
     const letterData = {
       'A': { name: '', description: '' },
@@ -175,6 +218,7 @@
     const goBtn = document.getElementById('goBtn');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
 
     function updateDisplay(letter) {
       const data = letterData[letter];
@@ -194,6 +238,30 @@
         nextBtn.disabled = (currentIndex === selectEl.options.length - 1);
       }
     }
+
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeToggleBtn.textContent = 'Switch to Light Mode';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        themeToggleBtn.textContent = 'Switch to Dark Mode';
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        setTheme('light');
+      } else {
+        setTheme('dark');
+      }
+    });
 
     goBtn.addEventListener('click', () => {
       updateDisplay(selectEl.value);
