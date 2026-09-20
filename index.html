@@ -191,8 +191,8 @@
     </div>
     <p>
       Currently complete letters: D, P, S, T, Y, Z; <br>
-      2x China, 1x Egypt, 1x Odyssey, 1x Mesopotamia, 1x America <br>
-      Last Updated: 09-09-2026 17:48
+      2x China, 1x Egypt, 1x Odyssey, 2x Mesopotamia, 1x America, 1x Wildcard, 1x Gilgamesh <br>
+      Last Updated: 09-19-2026 19:43
     </p>
   </div>
 
@@ -200,9 +200,9 @@
     const letterData = {
       'A': { name: '', description: '' },
       'B': { name: '', description: '' },
-      'C': { name: 'Clay Tablets', description: 'Clay tablets were soft blocks of mud used as writing surfaces in Ancient Mesopotamia. The Ancient Mesopotamian writers used sticks to press marks into wet clay before drying them under the sun. It was these tablets that preserved the world\'s first laws, receipts, and epics for thousands of years.' },
-      'D': { name: 'Daoism', description: 'Daoism is a peaceful way of thinking created in ancient China around 500 BCE by a wise philosopher named Laozi. It taught people to live in balance with nature rather than fighting the world around them. It is important because it helped ancient Chinese society stay peaceful, kind, and respectful toward nature. (Ancient China)' },
-      'E': { name: 'Enkidu', description: 'Enkidu is a legendary character in the Epic of Gilgamesh. He lived in the forests of Ancient Mesopotamia before moving to Gilgamesh\'s kingdom of Uruk. In the Epic, he fights Gilgamesh to stop Gilgamesh from continuing to be a tyrant (a king who abuses his power). Later, the Gods kill Enkidu. Gilgamesh sees Enkidu\'s dead body and fears death, which leads him to pursue immortality. (Epic of Gilgamesh)' },
+      'C': { name: 'Clay Tablets', description: 'Clay tablets were soft blocks of mud used as writing surfaces in Ancient Mesopotamia. The Ancient Mesopotamian writers used sticks to press marks into wet clay before drying them under the sun. It was these tablets that preserved the world\'s first laws, receipts, and epics for thousands of years. (Mesopotamia)' },
+      'D': { name: 'Daoism', description: 'Daoism is a peaceful way of thinking created in ancient China around 500 BCE by a wise philosopher named Laozi. It taught people to live in balance with nature rather than fighting the world around them. It is important because it helped ancient Chinese society stay peaceful, kind, and respectful toward nature. (China)' },
+      'E': { name: 'Enkidu', description: 'Enkidu is a legendary character in the Epic of Gilgamesh. He lived in the forests of Ancient Mesopotamia before moving to Gilgamesh\'s kingdom of Uruk. In the Epic, he fights Gilgamesh to stop Gilgamesh from continuing to be a tyrant (a king who abuses his power). Later, the Gods kill Enkidu. Gilgamesh sees Enkidu\'s dead body and fears death, which leads him to pursue immortality. (Gilgamesh)' },
       'F': { name: 'Farming', description: '' },
       'G': { name: 'Gilgamesh', description: '' },
       'H': { name: 'Harappa', description: '' },
@@ -215,15 +215,15 @@
       'O': { name: 'Oracle Bones', description: '' },
       'P': { name: 'Pyramids', description: 'The Pyramids of Giza are tombs for Pharaohs, who were the leaders of Ancient Egypt. They were built in Giza, Egypt, around 2500 BCE. Common working-class people lifted heavy stones to build the pyramids. These pyramids are significant because they serve as a physical representation of the mathematics and engineering of the Egyptians. (Egypt)' },
       'Q': { name: 'Quetta', description: '' },
-      'R': { name: 'Rivers', description: 'Rivers like the Nile, Tigris, Euphrates, Indus, and Yellow River provided fresh water to early humans starting around 3500 BCE. They deposited rich soil along their banks every year, making it easy for early communities to grow plenty of food. Rivers are important because all of the world\'s very first major civilizations grew up right next to them.' },
+      'R': { name: 'Rivers', description: 'Rivers like the Nile, Tigris, Euphrates, Indus, and Yellow River provided fresh water to early humans starting around 3500 BCE. They deposited rich soil along their banks every year, making it easy for early communities to grow plenty of food. Rivers are important because all of the world\'s very first major civilizations grew up right next to them. (Wildcard!)' },
       'S': { name: 'Sumer', description: 'In 4000 BCE, Sumer was a region of Mesopotamia that contained independent city-states. The Sumerians built temples, practiced agriculture, and traded with other nations. Sumer is important because they invented the wheel, the sailboat, and the first writing system. (Mesopotamia)' },
       'T': { name: 'Trojan Horse', description: 'The Trojan Horse was a big wooden horse built by the Greek soldiers in the Trojan War. The Greeks hid inside the horse and tricked the Trojans into bringing it into their city as a gift. At night, the soldiers snuck out and attacked the city from the inside. This is a famous story that teaches how clever thinking can win a battle when raw strength isn’t enough by itself. (Odyssey)' },
       'U': { name: 'Ur', description: '' },
-      'V': { name: 'Voyage of Odysseus6', description: '' },
+      'V': { name: 'Voyage of Odysseus', description: '' },
       'W': { name: 'Wall of Uruk', description: '' },
       'X': { name: 'Xia Dynasty', description: '' },
-      'Y': { name: 'Yellow River', description: 'The Yellow River is a river in Northern China that was important to the Shang Dynasty because it provided fertile soil and water for agriculture. It helped the people grow crops and develop their civilizations, but it often flooded, destroying the civilizations along its banks. (Ancient China)' },
-      'Z': { name: 'Zero', description: 'Zero was a concept discovered by thinkers in Ancient America around 36 BCE. Zero is used to stand for “nothing”. Inventing zero allowed for the development of complex mathematics. (America [Olmec and Chavin])' }
+      'Y': { name: 'Yellow River', description: 'The Yellow River is a river in Northern China that was important to the Shang Dynasty because it provided fertile soil and water for agriculture. It helped the people grow crops and develop their civilizations, but it often flooded, destroying the civilizations along its banks. (China)' },
+      'Z': { name: 'Zero', description: 'Zero was a concept discovered by thinkers in Ancient America around 36 BCE. Zero is used to stand for “nothing”. Inventing zero allowed for the development of complex mathematics. (America)' }
     };
 
     const selectEl = document.getElementById('letterSelect');
