@@ -267,9 +267,9 @@ function updateDisplay(letter) {
         document.getElementById('displayDescription').textContent = data.description;
         
         if (data.category) {
-          document.body.setAttribute('data-category', data.category);
+          document.documentElement.setAttribute('data-category', data.category);
         } else {
-          document.body.removeAttribute('data-category');
+          document.documentElement.removeAttribute('data-category');
         }
         
         const imageFileName = `${letter.toLowerCase()}.jpg`;
