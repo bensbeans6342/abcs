@@ -399,7 +399,7 @@
       if (theme === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
         themeToggleBtn.textContent = 'Switch to Light Mode';
-        localStorage.setItem('theme', 'dark');
+        torage.setItem('theme', 'dark');
       } else {
         document.documentElement.removeAttribute('data-theme');
         themeToggleBtn.textContent = 'Switch to Dark Mode';
@@ -410,14 +410,10 @@
     const savedTheme = localStorage.getItem('theme') || 'light';
     setTheme(savedTheme);
 
-    const hasSeenIntro = localStorage.getItem('hasSeenIntro');
-    if (!hasSeenIntro) {
-      welcomeModal.style.display = 'flex';
-    }
-
+    welcomeModal.style.display = 'flex';
+    
     closeModalBtn.addEventListener('click', () => {
       welcomeModal.style.display = 'none';
-      localStorage.setItem('hasSeenIntro', 'true');
     });
 
     themeToggleBtn.addEventListener('click', () => {
