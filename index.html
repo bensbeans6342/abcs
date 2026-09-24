@@ -273,7 +273,7 @@ function updateDisplay(letter) {
           document.documentElement.removeAttribute('data-category');
         }
         
-        const imageFileName = `${letter.toLowerCase()}.jpg`;
+        const imageFileName = `images/${letter.toLowerCase()}.`;
         document.getElementById('displayImage').src = imageFileName;
         document.getElementById('displayImage').alt = data.name;
 
