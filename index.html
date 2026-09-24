@@ -196,7 +196,6 @@
       <option value="Z">Z</option>
     </select>
     
-    <button id="goBtn">GO!</button>
     <button id="nextBtn">Next</button>
   </div>
 
@@ -253,7 +252,6 @@
     };
 
     const selectEl = document.getElementById('letterSelect');
-    const goBtn = document.getElementById('goBtn');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const themeToggleBtn = document.getElementById('themeToggleBtn');
@@ -306,9 +304,9 @@ function updateDisplay(letter) {
       }
     });
 
-    goBtn.addEventListener('click', () => {
-      updateDisplay(selectEl.value);
-    });
+selectEl.addEventListener('change', () => {
+  updateDisplay(selectEl.value);
+});
 
     prevBtn.addEventListener('click', () => {
       const currentIndex = selectEl.selectedIndex;
