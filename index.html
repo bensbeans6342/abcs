@@ -1,5 +1,3 @@
-
-  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +13,7 @@
       --border-color: #ddd;
       --controls-bg: #fff;
       --modal-bg: #ffffff;
+      --category-tag-color: #777777;
     }
 
     [data-theme="dark"] {
@@ -25,6 +24,7 @@
       --border-color: #333333;
       --controls-bg: #1e1e1e;
       --modal-bg: #1e1e1e;
+      --category-tag-color: #aaaaaa;
     }
     
     [data-category="mahabharata"] { --bg-color: #ffe6e6; }
@@ -46,7 +46,7 @@
     [data-theme="dark"][data-category="indus"]       { --bg-color: #1f140d; }
     [data-theme="dark"][data-category="iliad"]       { --bg-color: #0f0e1f; }
     [data-theme="dark"][data-category="america"]     { --bg-color: #1f0d1a; }
-    [data-theme="dark"][data-category="egypt"]       { --bg-color: #1c170d; }
+    [data-theme="dark"][data-category="egypt"] { --bg-color: #1c170d; }
     [data-theme="dark"][data-category="odyssey"]     { --bg-color: #0d1c1c; }
     
     body {
@@ -112,7 +112,7 @@
     .display-container {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 10px;
     }
 
     .letter-heading {
@@ -120,6 +120,21 @@
       font-weight: bold;
       margin: 0;
       color: var(--heading-color);
+      line-height: 1.1;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .letter-prefix {
+      margin-right: 8px;
+    }
+
+    .is-for-text {
+      font-size: 1.5rem;
+      font-weight: normal;
+      color: var(--subtext-color);
+      margin-left: 8px;
     }
 
     .item-title {
@@ -128,10 +143,20 @@
       color: var(--text-color);
     }
 
+    .item-category {
+      font-size: 0.95rem;
+      color: var(--category-tag-color);
+      margin: -2px 0 5px 0;
+      text-transform: capitalize;
+      font-style: italic;
+      font-weight: 500;
+    }
+
     .item-description {
       font-size: 1.1rem;
       line-height: 1.6;
       color: var(--subtext-color);
+      margin-top: 5px;
     }
 
     .item-image {
@@ -288,8 +313,8 @@
   </div>
 
   <div class="display-container">
-<h1 id="displayLetter" class="letter-heading">
-      <span id="letterVal"></span><span class="is-for-text">is for</span>
+    <h1 id="displayLetter" class="letter-heading">
+      <span class="letter-prefix">Letter </span><span id="letterVal">A</span><span class="is-for-text">is for</span>
     </h1>
     <h2 id="displayName" class="item-title"></h2>
     <div id="displayCategory" class="item-category"></div>
@@ -329,35 +354,36 @@
     </div>
   </div>
 
- <script>
+  <script>
     const letterData = {
-      'A': { name: 'Arjuna', category: 'mahabharata', description: 'Arjuna was a warrior prince and archer from ancient India. In the Mahabharata, he has to make difficult choices about fighting in a giant battle to protect his family’s kingdom. He teaches us about bravery, duty, and doint what is right even when it feels difficult.' },
-      'B': { name: 'Bhagavad Gita', category: 'mahabharata', description: 'The Bhagavad Gita is a story inside the Mahabharata epic from ancient India. It talks about the conversation where Prince Arjuna gets helpful life advice from his guide, Krishna. It taught the Hindus how to stay calm, overcome fear, and do their duty with a peaceful heart.' },
-      'C': { name: 'Clay Tablets', category: 'mesopotamia', description: 'Clay tablets were soft blocks of mud used as writing surfaces in Ancient Mesopotamia. The Ancient Mesopotamian writers used sticks to press marks into wet clay before drying them under the sun. It was these tablets that preserved the world\'s first laws, receipts, and epics for thousands of years.' },
-      'D': { name: 'Daoism', category: 'china', description: 'Daoism is a peaceful way of thinking created in ancient China around 500 BCE by a wise philosopher named Laozi. It taught people to live in balance with nature rather than fighting the world around them. It is important because it helped ancient Chinese society stay peaceful, kind, and respectful toward nature.' },
-      'E': { name: 'Enkidu', category: 'gilgamesh', description: 'Enkidu is a legendary character in the Epic of Gilgamesh. He lived in the forests of Ancient Mesopotamia before moving to Gilgamesh\'s kingdom of Uruk. In the Epic, he fights Gilgamesh to stop Gilgamesh from continuing to be a tyrant (a king who abuses his power). Later, the Gods kill Enkidu. Gilgamesh sees Enkidu\'s dead body and fears death, which leads him to pursue immortality.' },
-      'F': { name: 'Farming', category: 'wildcard', description: 'Farming started roughly at 10,000 BCE, the Neolithic Revolution, when ancient people learned to plant seeds and domesticate animals. Instead of constantly moving around to forage and hunt for food, families settled down in one place. The ample supply of food allowed humans to build permanent civilizations.' },
-      'G': { name: 'Gilgamesh', category: 'gilgamesh', description: 'Gilgamesh was the main character of the Epic of Gilgamesh. He was the king of the Mesopotamian city of Uruk. After losing his friend Enkidu, he went on a long and dangerous journey in search of immortality. In the end, he did not get immortality. The epic shares with us the lesson that one should enjoy their life as it is and to value one\'s friends.' },
-      'H': { name: 'Harappa', category: 'indus', description: 'Harappa was a massive city built near the Indus River around 2500 BCE. It is located in modern-day Pakistan. Builders built the city out of baked mud bricks with streets and large rooms to store grain. It shows that ancient civilizations had the ability to plan safe and organized cities.' },
-      'I': { name: 'Iliad', category: 'iliad', description: 'The Iliad is a famous epic poem written in ancient Greece around 750 BCE about the Trojan War. It tells the story of Greek warriors fighting outside the giant stone walls of the city of Troy. It teaches powerful lessons about bravery, true friendship, and the dangers of letting anger control your actions.' },
-      'J': { name: 'Jagged Andes', category: 'america', description: 'The Jagged Andes are giant, rocky mountains in South America where the Chavin built their homes around  900 BCE. Because the land was steep and rocky, farmers carved flat stone steps called terraces directly into the mountain sides to grow crops. These mountains show how ancient people adapted to survive high up in the clouds.' },
-      'K': { name: 'Krishna', category: 'mahabharata', description: 'Krishna is a wise deity who lives in Ancient India in the Mahabharata. In a big war, he serves as Arjuna’s chariot driver, while also giving him encouraging advice when Arjuna is scared. His teachings helped people understand how to stay brave and fulfill their duties in life.' },
-      'L': { name: 'Llamas', category: 'america', description: 'Llamas are strong, fluffy mammals in South America that the ancient Chavin used as pack animals to travel across the mountains. Because the trade routes were so long and steep, people loaded heavy goods onto their backs to move items between villages. These helpful animals also provided warm wool and meat, showing how the Chavin relied on them to survive.' },
-      'M': { name: 'Mohenjo-Daro', category: 'indus', description: 'Mohenjo-Daro was a large, advanced city built in the Indus River Valley around 2500 BCE. The people who lived there built their homes out of baked mud bricks and created some of the world\'s first underground sewer systems. It shows how the ancient Indus people used early engineering to keep their cities clean and organized.' },
-      'N': { name: 'Nile River', category: 'egypt', description: 'The Nile River is the longest river in the World. It flows through the Egyptian desert. Every summer, the river floods its banks and leaves mud that is rich in nutrients for growing wheat. Without the river’s water and deposited soil, the great Egyptian civilization would not have survived.' },
-      'O': { name: 'Oracle Bones', category: 'china', description: 'Oracle bones are pieces of turtle shells or animal bones that were used by priests in Shang China. The priests carved questions into the bones, heated them until they cracked, and then read the cracks to attempt predict the future. These bones contain the earliest known examples of ancient Chinese writing.' },
-      'P': { name: 'Pyramids', category: 'egypt', description: 'The Pyramids of Giza are tombs for Pharaohs, who were the leaders of Ancient Egypt. They were built in Giza, Egypt, around 2500 BCE. Common working-class people lifted heavy stones to build the pyramids. These pyramids are significant because they serve as a physical representation of the mathematics and engineering of the Egyptians.' },
-      'Q': { name: 'Quetta', category: 'indus', description: 'Quetta is a high-altitude valley in modern-day Pakistan where ancient farming villages were built. Around 7000 BCE, the Indus people living here learned how to herd sheep and grow crops. It shows how early humans learned to adapt to mountainous environments before massive cities were built.' },
-      'R': { name: 'Rivers', category: 'wildcard', description: 'Rivers like the Nile, Tigris, Euphrates, Indus, and Yellow River provided fresh water to early humans starting around 3500 BCE. They deposited rich soil along their banks every year, making it easy for early communities to grow plenty of food. Rivers are important because all of the world\'s very first major civilizations grew up right next to them.' },
-      'S': { name: 'Sumer', category: 'mesopotamia', description: 'In 4000 BCE, Sumer was a region of Mesopotamia that contained independent city-states. The Sumerians built temples, practiced agriculture, and traded with other nations. Sumer is important because they invented the wheel, the sailboat, and the first writing system.' },
-      'T': { name: 'Trojan Horse', category: 'iliad', description: 'The Trojan Horse was a big wooden horse built by the Greek soldiers in the Trojan War. The Greeks hid inside the horse and tricked the Trojans into bringing it into their city as a gift. At night, the soldiers snuck out and attacked the city from the inside. This is a famous story that teaches how clever thinking can win a battle when raw strength isn\'t enough by itself.' },
-      'U': { name: 'Ur', category: 'mesopotamia', description: 'Ur was a busy and wealthy city-state built near the Persian Gulf in southern Mesopotamia around 2100 BCE. It had a giant mud-brick tower called the Ziggurat where priests performed ceremonies and rituals for their gods. Ur was a major hub for trade and economy, artwork, and organized laws of the ancient world.' },
-      'V': { name: 'Voyage of Odysseus', category: 'iliad', description: 'The Voyage of Odysseus was a ten-year-long journey across dangerous seas taken by the Greek hero Odysseus trying to return home after the Trojan War. He faces monsters, storms, and magic. It teaches us about patience, willpower, and never giving up while trying to reach your family.' },
-      'W': { name: 'Wall of Uruk', category: 'gilgamesh', description: 'The Wall of Uruk was a massive barrier built out of baked mud bricks around Gilgamesh\'s city in Mesopotamia at around 2700 BCE. It was wide enough for people to walk on the top, and it kept the citizens safe from outside invaders and wild animals. The wall was Gilgamesh\'s greatest building accomplishment and protected his people for generations.' },
-      'X': { name: 'Xia Dynasty', category: 'china', description: 'The Xia Dynasty is a legendary first kingdom of ancient China. It started around 2000 BCE under the leader Yu the Great. According to legends, Yu dug massive channels to drain the floods away from farm fields. It marks the legendary beginning of Chinese government and teamwork.' },
-      'Y': { name: 'Yellow River', category: 'china', description: 'The Yellow River is a river in Northern China that was important to the Shang Dynasty because it provided fertile soil and water for agriculture. It helped the people grow crops and develop their civilizations, but it often flooded, destroying the civilizations along its banks.' },
-      'Z': { name: 'Zero', category: 'america', description: 'Zero was a concept discovered by thinkers in Ancient America around 36 BCE. Zero is used to stand for “nothing”. Inventing zero allowed for the development of complex mathematics.' }
+      'A': { name: 'Arjuna', category: 'Mahabharata', description: 'Arjuna was a warrior prince and archer from ancient India. In the Mahabharata, he has to make difficult choices about fighting in a giant battle to protect his family’s kingdom. He teaches us about bravery, duty, and doing what is right even when it feels difficult.' },
+      'B': { name: 'Bhagavad Gita', category: 'Mahabharata', description: 'The Bhagavad Gita is a story inside the Mahabharata epic from ancient India. It talks about the conversation where Prince Arjuna gets helpful life advice from his guide, Krishna. It taught the Hindus how to stay calm, overcome fear, and do their duty with a peaceful heart.' },
+      'C': { name: 'Clay Tablets', category: 'Mesopotamia', description: 'Clay tablets were soft blocks of mud used as writing surfaces in Ancient Mesopotamia. The Ancient Mesopotamian writers used sticks to press marks into wet clay before drying them under the sun. It was these tablets that preserved the world\'s first laws, receipts, and epics for thousands of years.' },
+      'D': { name: 'Daoism', category: 'China', description: 'Daoism is a peaceful way of thinking created in ancient China around 500 BCE by a wise philosopher named Laozi. It taught people to live in balance with nature rather than fighting the world around them. It is important because it helped ancient Chinese society stay peaceful, kind, and respectful toward nature.' },
+      'E': { name: 'Enkidu', category: 'Gilgamesh', description: 'Enkidu is a legendary character in the Epic of Gilgamesh. He lived in the forests of Ancient Mesopotamia before moving to Gilgamesh\'s kingdom of Uruk. In the Epic, he fights Gilgamesh to stop Gilgamesh from continuing to be a tyrant (a king who abuses his power). Later, the Gods kill Enkidu. Gilgamesh sees Enkidu\'s dead body and fears death, which leads him to pursue immortality.' },
+      'F': { name: 'Farming', category: 'Wildcard', description: 'Farming started roughly at 10,000 BCE, the Neolithic Revolution, when ancient people learned to plant seeds and domesticate animals. Instead of constantly moving around to forage and hunt for food, families settled down in one place. The ample supply of food allowed humans to build permanent civilizations.' },
+      'G': { name: 'Gilgamesh', category: 'Gilgamesh', description: 'Gilgamesh was the main character of the Epic of Gilgamesh. He was the king of the Mesopotamian city of Uruk. After losing his friend Enkidu, he went on a long and dangerous journey in search of immortality. In the end, he did not get immortality. The epic shares with us the lesson that one should enjoy their life as it is and to value one\'s friends.' },
+      'H': { name: 'Harappa', category: 'Indus', description: 'Harappa was a massive city built near the Indus River around 2500 BCE. It is located in modern-day Pakistan. Builders built the city out of baked mud bricks with streets and large rooms to store grain. It shows that ancient civilizations had the ability to plan safe and organized cities.' },
+      'I': { name: 'Iliad', category: 'Iliad', description: 'The Iliad is a famous epic poem written in ancient Greece around 750 BCE about the Trojan War. It tells the story of Greek warriors fighting outside the giant stone walls of the city of Troy. It teaches powerful lessons about bravery, true friendship, and the dangers of letting anger control your actions.' },
+      'J': { name: 'Jagged Andes', category: 'America', description: 'The Jagged Andes are giant, rocky mountains in South America where the Chavin built their homes around 900 BCE. Because the land was steep and rocky, farmers carved flat stone steps called terraces directly into the mountain sides to grow crops. These mountains show how ancient people adapted to survive high up in the clouds.' },
+      'K': { name: 'Krishna', category: 'Mahabharata', description: 'Krishna is a wise deity who lives in Ancient India in the Mahabharata. In a big war, he serves as Arjuna’s chariot driver, while also giving him encouraging advice when Arjuna is scared. His teachings helped people understand how to stay brave and fulfill their duties in life.' },
+      'L': { name: 'Llamas', category: 'America', description: 'Llamas are strong, fluffy mammals in South America that the ancient Chavin used as pack animals to travel across the mountains. Because the trade routes were so long and steep, people loaded heavy goods onto their backs to move items between villages. These helpful animals also provided warm wool and meat, showing how the Chavin relied on them to survive.' },
+      'M': { name: 'Mohenjo-Daro', category: 'Indus', description: 'Mohenjo-Daro was a large, advanced city built in the Indus River Valley around 2500 BCE. The people who lived there built their homes out of baked mud bricks and created some of the world\'s first underground sewer systems. It shows how the ancient Indus people used early engineering to keep their cities clean and organized.' },
+      'N': { name: 'Nile River', category: 'Egypt', description: 'The Nile River is the longest river in the World. It flows through the Egyptian desert. Every summer, the river floods its banks and leaves mud that is rich in nutrients for growing wheat. Without the river’s water and deposited soil, the great Egyptian civilization would not have survived.' },
+      'O': { name: 'Oracle Bones', category: 'China', description: 'Oracle bones are pieces of turtle shells or animal bones that were used by priests in Shang China. The priests carved questions into the bones, heated them until they cracked, and then read the cracks to attempt predict the future. These bones contain the earliest known examples of ancient Chinese writing.' },
+      'P': { name: 'Pyramids', category: 'Egypt', description: 'The Pyramids of Giza are tombs for Pharaohs, who were the leaders of Ancient Egypt. They were built in Giza, Egypt, around 2500 BCE. Common working-class people lifted heavy stones to build the pyramids. These pyramids are significant because they serve as a physical representation of the mathematics and engineering of the Egyptians.' },
+      'Q': { name: 'Quetta', category: 'Indus', description: 'Quetta is a high-altitude valley in modern-day Pakistan where ancient farming villages were built. Around 7000 BCE, the Indus people living here learned how to herd sheep and grow crops. It shows how early humans learned to adapt to mountainous environments before massive cities were built.' },
+      'R': { name: 'Rivers', category: 'Wildcard', description: 'Rivers like the Nile, Tigris, Euphrates, Indus, and Yellow River provided fresh water to early humans starting around 3500 BCE. They deposited rich soil along their banks every year, making it easy for early communities to grow plenty of food. Rivers are important because all of the world\'s very first major civilizations grew up right next to them.' },
+      'S': { name: 'Sumer', category: 'Mesopotamia', description: 'In 4000 BCE, Sumer was a region of Mesopotamia that contained independent city-states. The Sumerians built temples, practiced agriculture, and traded with other nations. Sumer is important because they invented the wheel, the sailboat, and the first writing system.' },
+      'T': { name: 'Trojan Horse', category: 'Iliad', description: 'The Trojan Horse was a big wooden horse built by the Greek soldiers in the Trojan War. The Greeks hid inside the horse and tricked the Trojans into bringing it into their city as a gift. At night, the soldiers snuck out and attacked the city from the inside. This is a famous story that teaches how clever thinking can win a battle when raw strength isn\'t enough by itself.' },
+      'U': { name: 'Ur', category: 'Mesopotamia', description: 'Ur was a busy and wealthy city-state built near the Persian Gulf in southern Mesopotamia around 2100 BCE. It had a giant mud-brick tower called the Ziggurat where priests performed ceremonies and rituals for their gods. Ur was a major hub for trade and economy, artwork, and organized laws of the ancient world.' },
+      'V': { name: 'Voyage of Odysseus', category: 'Iliad', description: 'The Voyage of Odysseus was a ten-year-long journey across dangerous seas taken by the Greek hero Odysseus trying to return home after the Trojan War. He faces monsters, storms, and magic. It teaches us about patience, willpower, and never giving up while trying to reach your family.' },
+      'W': { name: 'Wall of Uruk', category: 'Gilgamesh', description: 'The Wall of Uruk was a massive barrier built out of baked mud bricks around Gilgamesh\'s city in Mesopotamia at around 2700 BCE. It was wide enough for people to walk on the top, and it kept the citizens safe from outside invaders and wild animals. The wall was Gilgamesh\'s greatest building accomplishment and protected his people for generations.' },
+      'X': { name: 'Xia Dynasty', category: 'China', description: 'The Xia Dynasty is a legendary first kingdom of ancient China. It started around 2000 BCE under the leader Yu the Great. According to legends, Yu dug massive channels to drain the floods away from farm fields. It marks the legendary beginning of Chinese government and teamwork.' },
+      'Y': { name: 'Yellow River', category: 'China', description: 'The Yellow River is a river in Northern China that was important to the Shang Dynasty because it provided fertile soil and water for agriculture. It helped the people grow crops and develop their civilizations, but it often flooded, destroying the civilizations along its banks.' },
+      'Z': { name: 'Zero', category: 'America', description: 'Zero was a concept discovered by thinkers in Ancient America around 36 BCE. Zero is used to stand for “nothing”. Inventing zero allowed for the development of complex mathematics.' }
     };
+
     const selectEl = document.getElementById('letterSelect');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
@@ -371,12 +397,15 @@
 
       if (data) {
         selectEl.value = letter;
-        document.getElementById('displayLetter').textContent = letter;
+        
+        document.getElementById('letterVal').textContent = letter;
         document.getElementById('displayName').textContent = data.name;
+        
+        document.getElementById('displayCategory').textContent = `Category: ${data.category}`;
         document.getElementById('displayDescription').textContent = data.description;
         
         if (data.category) {
-          document.documentElement.setAttribute('data-category', data.category);
+          document.documentElement.setAttribute('data-category', data.category.toLowerCase());
         } else {
           document.documentElement.removeAttribute('data-category');
         }
@@ -399,7 +428,7 @@
       if (theme === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
         themeToggleBtn.textContent = 'Switch to Light Mode';
-        torage.setItem('theme', 'dark');
+        localStorage.setItem('theme', 'dark');
       } else {
         document.documentElement.removeAttribute('data-theme');
         themeToggleBtn.textContent = 'Switch to Dark Mode';
